@@ -1,6 +1,6 @@
 package com.com.on.arithmetic.graph;
 
-import com.company.priority.IndexMinPriorityQueue;
+import com.com.on.arithmetic.priority.IndexMinPriorityQueue;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
@@ -17,13 +17,13 @@ import java.util.Queue;
  */
 public class PrimMST {
     //索引代表顶点，值表示当前顶点和最小生成树之间的最短边
-    private Edge[] edgeTo;
+    private final Edge[] edgeTo;
     //索引代表顶点，值表示当前顶点和最小生成树之间的最短边的权重
-    private double[] distTo;
+    private final double[] distTo;
     //索引代表顶点，如果当前顶点已经在树中，则值为true，否则为false
-    private boolean[] marked;
+    private final boolean[] marked;
     //存放树中顶点与非树中顶点之间的有效横切边
-    private IndexMinPriorityQueue<Double> indexMinPriorityQueue;
+    private final IndexMinPriorityQueue<Double> indexMinPriorityQueue;
 
     //根据一副加权无向图，创建最小生成树计算对象
     public PrimMST(EdgeWeightGraph G) {
@@ -55,7 +55,7 @@ public class PrimMST {
                 edgeTo[w] = edge;
                 distTo[edge.other(w)] = edge.getWeight();
                 if (indexMinPriorityQueue.contains(w) != null) {
-                    double temp = (double) indexMinPriorityQueue.contains(w);
+                    double temp = indexMinPriorityQueue.contains(w);
                     if (edge.getWeight() < temp) {
                         indexMinPriorityQueue.changeItem(w, edge.getWeight());
                     }
